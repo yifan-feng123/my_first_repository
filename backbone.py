@@ -1,5 +1,5 @@
 import torch
-import torch.nn from torch
+import torch.nn as nn
 
 
 def autopad(k, p=None):
