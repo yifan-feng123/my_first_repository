@@ -365,7 +365,7 @@ class YoloBody(nn.Module):
 
         # 20, 20, 1024 => 20, 20, 512
         self.sppcspc                = SPPCSPC(transition_channels * 32, transition_channels * 16)
-        self.cbam1                  = CBAM(transition_channels * 16)
+        # self.cbam1                  = CBAM(transition_channels * 16)
         # 20, 20, 512 => 20, 20, 256 => 40, 40, 256
         self.conv_for_P5            = Conv(transition_channels * 16, transition_channels * 8)
         # 40, 40, 1024 => 40, 40, 256
@@ -373,11 +373,11 @@ class YoloBody(nn.Module):
         # 40, 40, 512 => 40, 40, 256
         self.conv3_for_upsample1    = Multi_Concat_Block(transition_channels * 16, panet_channels * 4, transition_channels * 8, e=e, n=n, ids=ids)
 
-        self.cbam2 = CBAM(transition_channels * 32)
+        # self.cbam2 = CBAM(transition_channels * 32)
         # 40, 40, 256 => 40, 40, 128 => 80, 80, 128
         self.conv_for_P4            = Conv(transition_channels * 8, transition_channels * 4)
         # 80, 80, 512 => 80, 80, 128
-        self.cbam3 = CBAM(transition_channels * 16)
+        # self.cbam3 = CBAM(transition_channels * 16)
         self.conv_for_feat1         = Conv(transition_channels * 16, transition_channels * 4)
         # 80, 80, 256 => 80, 80, 128
         self.conv3_for_upsample2    = Multi_Concat_Block(transition_channels * 8, panet_channels * 2, transition_channels * 4, e=e, n=n, ids=ids)
@@ -486,5 +486,5 @@ class YoloBody(nn.Module):
         #---------------------------------------------------#
         out0 = self.yolo_head_P5(P5)
         # outputs = self.head.forward((P3, P4, P5))
-        return [out0, out1, out2]
+        return [out0, out1]
         # return outputs
