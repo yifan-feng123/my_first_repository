@@ -77,7 +77,7 @@ class YOLOLoss(nn.Module):
     #     else:
     #         return iou  # IoU
 
-    def bbox_iou(self, box1, box2, x1y1x2y2=True, GIoU=False, DIoU=False, CIoU=False, SIoU=False, EIoU=False, eps=1e-7):
+    def bbox_iou(self, box1, box2, x1y1x2y2=True, GIoU=True, DIoU=False, CIoU=False, SIoU=False, EIoU=False, eps=1e-7):
         # Returns the IoU of box1 to box2. box1 is 4, box2 is nx4
         box2 = box2.T
 
@@ -85,9 +85,9 @@ class YOLOLoss(nn.Module):
         if x1y1x2y2:  # x1, y1, x2, y2 = box1
             b1_x1, b1_y1, b1_x2, b1_y2 = box1[0], box1[1], box1[2], box1[3]
             b2_x1, b2_y1, b2_x2, b2_y2 = box2[0], box2[1], box2[2], box2[3]
-        else:  # transform from xywh to xyxy
-            b1_x1, b1_x2 = box1[0] - box1[2] / 2, box1[0] + box1[2] / 2
-            b1_y1, b1_y2 = box1[1] - box1[3] / 2, box1[1] + box1[3] / 2
+        # else:  # transform from xywh to xyxy
+        #     b1_x1, b1_x2 = box1[0] - box1[2] / 2, box1[0] + box1[2] / 2
+        #     b1_y1, b1_y2 = box1[1] - box1[3] / 2, box1[1] + box1[3] / 2
             b2_x1, b2_x2 = box2[0] - box2[2] / 2, box2[0] + box2[2] / 2
             b2_y1, b2_y2 = box2[1] - box2[3] / 2, box2[1] + box2[3] / 2
 
