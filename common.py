@@ -9,7 +9,7 @@ import platform
 import warnings
 from collections import OrderedDict, namedtuple
 from copy import copy
-from pathlib import Path
+from pathlib as Path
 
 import cv2
 import numpy as np
